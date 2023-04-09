@@ -1,7 +1,6 @@
 const grid = document.querySelector('.grid');
 const spanPlayer = document.querySelector('.player');
 const timer = document.querySelector('.timer');
-const botao = document.querySelector('.btn');
 
 
 const characters = [
@@ -17,6 +16,11 @@ const characters = [
   'ursomal',
 ];
 
+// função para recomeçar após as cartas serem todas descobertas
+const recomecarJogo = () => {
+  window.location.reload();
+}
+
 const createElement = (tag, className) => {
   const element = document.createElement(tag);
   element.className = className;
@@ -26,15 +30,18 @@ const createElement = (tag, className) => {
 let firstCard = '';
 let secondCard = '';
 
+// função para aparecer o alert no fim do jogo
 const checkEndGame = () => {
   const disabledCards = document.querySelectorAll('.disabled-card');
 
   if (disabledCards.length === 20) {
     clearInterval(this.loop);
     alert(`Parabéns, ${spanPlayer.innerHTML}! Seu tempo foi de: ${timer.innerHTML}`);
+    recomecarJogo();
   }
 }
 
+// função para selecionar as cartas e deixalas presas se forem as duplas
 const checkCards = () => {
   const firstCharacter = firstCard.getAttribute('data-character');
   const secondCharacter = secondCard.getAttribute('data-character');
@@ -63,6 +70,8 @@ const checkCards = () => {
 
 }
 
+
+// função que revela as cartas com as imagens
 const revealCard = ({ target }) => {
 
   if (target.parentNode.className.includes('reveal-card')) {
@@ -84,6 +93,7 @@ const revealCard = ({ target }) => {
   }
 }
 
+// função que cria as cartas
 const createCard = (character) => {
 
   const card = createElement('div', 'card');
@@ -104,14 +114,15 @@ const createCard = (character) => {
 const loadGame = () => {
   const duplicateCharacters = [...characters, ...characters];
 
-  const shuffledArray = duplicateCharacters.sort(() => Math.random() - 0.5);
+  const cardShuffled = duplicateCharacters.sort(() => Math.random() - 0.5);
 
-  shuffledArray.forEach((character) => {
+  cardShuffled.forEach((character) => {
     const card = createCard(character);
     grid.appendChild(card);
   });
 }
 
+// função que inicia o temporizador
 const startTimer = () => {
 
   this.loop = setInterval(() => {

@@ -1,3 +1,7 @@
+body {
+  background-color: black;
+}
+
 .login-form {
     align-items: center;
     display: flex;
@@ -21,7 +25,7 @@
   
   
   .login__header h1 {
-    color: #333;
+    color: whitesmoke;
     font-size: 1.5em;
   }
   
@@ -39,7 +43,7 @@
   
   .login__button {
     background-color: #00b5cc;
-    border: 3px solid #b2df28;
+    /* border: 3px solid #b2df28; */
     border-radius: 8px;
     color: #fff;
     cursor: pointer;
